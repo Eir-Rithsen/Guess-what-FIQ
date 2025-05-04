@@ -1,0 +1,19 @@
+{
+  "preguntas": [
+    {
+      "texto": "¿Para qué se usa este instrumento?",
+      "opciones": ["Disección de tejidos blandos", "Corte de hueso", "Sutura"],
+      "correcta": "Disección de tejidos blandos"
+    },
+    {
+      "texto": "¿En qué cirugía es más utilizado?",
+      "opciones": ["Neurocirugía", "Cirugía general", "Oftalmología"],
+      "correcta": "Cirugía general"
+    },
+    {
+      "texto": "¿En qué fase de la cirugía se usa más?",
+      "opciones": ["Hemostasia", "Resección de tejido", "Cierre"],
+      "correcta": "Resección de tejido"
+    }
+  ]
+}
