@@ -1,13 +1,20 @@
 document.getElementById('guess-form').addEventListener('submit', function (e) {
   e.preventDefault();
   const userGuess = document.getElementById('guess-input').value.trim().toLowerCase();
+  const inputBox = document.getElementById('guess-input');
 
   if (userGuess === "tijeras de metzenbaum") {
-    document.getElementById('feedback').textContent = "¡Correcto! 🎉";
+    showMessage("¡Correcto! ✅");
+    inputBox.classList.add("correct");
     loadQuestions();
   } else {
-    document.getElementById('feedback').textContent = "Incorrecto, intenta de nuevo.";
+    showMessage("Incorrecto, intenta de nuevo ❌");
+    inputBox.classList.add("incorrect");
   }
+
+  setTimeout(() => {
+    inputBox.classList.remove("correct", "incorrect");
+  }, 2000);
 });
 
 function loadQuestions() {
@@ -15,33 +22,45 @@ function loadQuestions() {
     .then(response => response.json())
     .then(data => {
       const container = document.getElementById('multiple-choice');
-      container.innerHTML = ''; // Limpiar contenido anterior
+      container.innerHTML = '';
 
       data.preguntas.forEach((pregunta) => {
-        // Crear un párrafo para la pregunta
         const preguntaTexto = document.createElement('p');
         preguntaTexto.textContent = pregunta.texto;
         container.appendChild(preguntaTexto);
 
-        // Crear botones de respuesta
         pregunta.opciones.forEach((opcion) => {
           const btn = document.createElement('button');
           btn.textContent = opcion;
-          btn.onclick = () => checkAnswer(opcion, pregunta.correcta);
+          btn.onclick = () => checkAnswer(btn, opcion, pregunta.correcta);
           container.appendChild(btn);
         });
 
-        // Espaciado visual entre preguntas
         container.appendChild(document.createElement('hr'));
       });
-    })
-    .catch(error => console.error("Error cargando las preguntas:", error));
+    });
 }
 
-function checkAnswer(opcionSeleccionada, respuestaCorrecta) {
+function checkAnswer(button, opcionSeleccionada, respuestaCorrecta) {
   if (opcionSeleccionada === respuestaCorrecta) {
-    alert("¡Correcto! ✅");
+    showMessage("¡Correcto! ✅");
+    button.classList.add("correct");
   } else {
-    alert("Incorrecto, intenta de nuevo. ❌");
+    showMessage("Incorrecto ❌");
+    button.classList.add("incorrect");
   }
+
+  setTimeout(() => {
+    button.classList.remove("correct", "incorrect");
+  }, 2000);
+}
+
+function showMessage(text) {
+  const popup = document.getElementById("message-popup");
+  popup.textContent = text;
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 2000);
 }
