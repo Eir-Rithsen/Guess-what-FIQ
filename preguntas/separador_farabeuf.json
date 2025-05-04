@@ -29,6 +29,21 @@
       "texto": "¿Son considerados tiempos especiales en algunos procedimientos?",
       "opciones": ["Sí", "No"],
       "correcta": "Sí"
+    },
+    {
+      "texto": "¿A qué clasificación pertenece el separador de Farabeuf?",
+      "opciones": ["Manual", "Autoestático", "De prensión"],
+      "correcta": "Manual"
+    },
+    {
+      "texto": "¿Cuál es la diferencia entre un separador manual y uno autoestático?",
+      "opciones": ["El manual requiere asistencia, el autoestático se mantiene solo", "El manual es más grande", "El autoestático corta tejidos"],
+      "correcta": "El manual requiere asistencia, el autoestático se mantiene solo"
+    },
+    {
+      "texto": "¿Cuál de estos separadores es autoestático?",
+      "opciones": ["Farabeuf", "Balfour", "Senn Miller"],
+      "correcta": "Balfour"
     }
   ]
 }
