@@ -1,0 +1,34 @@
+{
+  "preguntas": [
+    {
+      "texto": "¿En qué tiempo quirúrgico se utilizan los separadores de Farabeuf?",
+      "opciones": ["Hemostasia", "Separación", "Cierre"],
+      "correcta": "Separación"
+    },
+    {
+      "texto": "¿Cuál es la función principal de un separador de Farabeuf?",
+      "opciones": ["Sujetar órganos", "Mantener abiertas incisiones", "Cerrar heridas"],
+      "correcta": "Mantener abiertas incisiones"
+    },
+    {
+      "texto": "¿Se utilizan para la síntesis de tejidos?",
+      "opciones": ["Sí", "No"],
+      "correcta": "No"
+    },
+    {
+      "texto": "¿En qué tipos de cirugía se emplea?",
+      "opciones": ["Cirugía general", "Neurocirugía", "Oftalmología"],
+      "correcta": "Cirugía general"
+    },
+    {
+      "texto": "¿Ayudan en la hemostasia?",
+      "opciones": ["Sí", "No"],
+      "correcta": "No"
+    },
+    {
+      "texto": "¿Son considerados tiempos especiales en algunos procedimientos?",
+      "opciones": ["Sí", "No"],
+      "correcta": "Sí"
+    }
+  ]
+}
