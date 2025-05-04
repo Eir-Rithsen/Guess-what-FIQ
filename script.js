@@ -2,18 +2,21 @@ document.getElementById('guess-form').addEventListener('submit', function (e) {
   e.preventDefault();
   const userGuess = document.getElementById('guess-input').value.trim().toLowerCase();
   const inputBox = document.getElementById('guess-input');
+  const feedback = document.getElementById('feedback');
 
   if (userGuess === "tijeras de metzenbaum") {
-    showMessage("¡Correcto! ✅");
-    inputBox.classList.add("correct");
+    feedback.textContent = "✅ ¡Correcto!";
+    feedback.classList.add("correct");
+    showMessage("¡Bien hecho! 🎉");
     loadQuestions();
   } else {
-    showMessage("Incorrecto, intenta de nuevo ❌");
-    inputBox.classList.add("incorrect");
+    feedback.textContent = "❌ Incorrecto, intenta de nuevo.";
+    feedback.classList.add("incorrect");
+    showMessage("Respuesta equivocada. ❌");
   }
 
   setTimeout(() => {
-    inputBox.classList.remove("correct", "incorrect");
+    feedback.classList.remove("correct", "incorrect");
   }, 2000);
 });
 
@@ -38,16 +41,17 @@ function loadQuestions() {
 
         container.appendChild(document.createElement('hr'));
       });
-    });
+    })
+    .catch(error => console.error("Error cargando preguntas:", error));
 }
 
 function checkAnswer(button, opcionSeleccionada, respuestaCorrecta) {
   if (opcionSeleccionada === respuestaCorrecta) {
-    showMessage("¡Correcto! ✅");
     button.classList.add("correct");
+    showMessage("¡Respuesta correcta! ✅");
   } else {
-    showMessage("Incorrecto ❌");
     button.classList.add("incorrect");
+    showMessage("Intenta de nuevo. ❌");
   }
 
   setTimeout(() => {
