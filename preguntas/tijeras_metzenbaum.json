@@ -1,19 +1,34 @@
 {
   "preguntas": [
     {
-      "texto": "¿Para qué se usa este instrumento?",
-      "opciones": ["Disección de tejidos blandos", "Corte de hueso", "Sutura"],
+      "texto": "¿En qué tiempo quirúrgico se utilizan las tijeras de Metzenbaum?",
+      "opciones": ["Hemostasia", "Diéresis", "Síntesis"],
+      "correcta": "Diéresis"
+    },
+    {
+      "texto": "¿Cuál es la función principal de las tijeras de Metzenbaum?",
+      "opciones": ["Cortar hueso", "Disección de tejidos blandos", "Sujetar órganos"],
       "correcta": "Disección de tejidos blandos"
     },
     {
-      "texto": "¿En qué cirugía es más utilizado?",
-      "opciones": ["Neurocirugía", "Cirugía general", "Oftalmología"],
-      "correcta": "Cirugía general"
+      "texto": "¿Son utilizadas en la fase de síntesis de la cirugía?",
+      "opciones": ["Sí", "No"],
+      "correcta": "No"
     },
     {
-      "texto": "¿En qué fase de la cirugía se usa más?",
-      "opciones": ["Hemostasia", "Resección de tejido", "Cierre"],
-      "correcta": "Resección de tejido"
+      "texto": "¿En qué momento de la cirugía se usan más comúnmente?",
+      "opciones": ["Separación de tejidos", "Cierre de la incisión", "Hemostasia"],
+      "correcta": "Separación de tejidos"
+    },
+    {
+      "texto": "¿Las tijeras de Metzenbaum pueden utilizarse para prehensión?",
+      "opciones": ["Sí", "No"],
+      "correcta": "No"
+    },
+    {
+      "texto": "¿Son herramientas comunes en tiempos especiales?",
+      "opciones": ["Sí", "No"],
+      "correcta": "Sí"
     }
   ]
 }
