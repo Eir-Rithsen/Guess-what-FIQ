@@ -1,12 +1,14 @@
 let currentQuestionIndex = 0;
+let currentImageIndex = 0;
 let questionsData = [];
+const images = ["Tijeras de Metzenbaum.jpg", "Separador de Farabeuf.jpg"]; // Lista de imágenes en la carpeta 'imagenes'
 
 document.getElementById('guess-form').addEventListener('submit', function (e) {
   e.preventDefault();
   const userGuess = document.getElementById('guess-input').value.trim().toLowerCase();
   const feedback = document.getElementById('feedback');
 
-  if (userGuess === "tijeras de metzenbaum") {
+  if (userGuess === "tijeras de metzenbaum" || userGuess === "separador de farabeuf") {
     feedback.textContent = "✅ ¡Correcto!";
     feedback.classList.add("correct");
     showMessage("¡Bien hecho! 🎉");
@@ -23,7 +25,9 @@ document.getElementById('guess-form').addEventListener('submit', function (e) {
 });
 
 function loadQuestions() {
-  fetch('preguntas/tijeras_metzenbaum.json')
+  const currentFile = currentImageIndex === 0 ? "preguntas/tijeras_metzenbaum.json" : "preguntas/separador_farabeuf.json";
+
+  fetch(currentFile)
     .then(response => response.json())
     .then(data => {
       questionsData = data.preguntas;
@@ -72,6 +76,10 @@ document.getElementById('prev-question').addEventListener('click', function () {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
     showQuestion();
+  } else if (currentImageIndex > 0) {
+    currentImageIndex--;
+    updateImage();
+    loadQuestions();
   }
 });
 
@@ -79,8 +87,17 @@ document.getElementById('next-question').addEventListener('click', function () {
   if (currentQuestionIndex < questionsData.length - 1) {
     currentQuestionIndex++;
     showQuestion();
+  } else if (currentImageIndex < images.length - 1) {
+    currentImageIndex++;
+    updateImage();
+    loadQuestions();
   }
 });
+
+function updateImage() {
+  const imgElement = document.getElementById("quiz-image");
+  imgElement.src = `imagenes/${images[currentImageIndex]}`;
+}
 
 function showMessage(text) {
   const popup = document.getElementById("message-popup");
