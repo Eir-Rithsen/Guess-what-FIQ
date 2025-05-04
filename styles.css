@@ -48,3 +48,15 @@ button:hover {
   border-radius: 8px;
   font-size: 1.1em;
 }
+#sprite-container img {
+  width: 150px;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  animation: bounce 1.5s infinite alternate;
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
