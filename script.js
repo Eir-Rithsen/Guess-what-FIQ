@@ -15,20 +15,33 @@ function loadQuestions() {
     .then(response => response.json())
     .then(data => {
       const container = document.getElementById('multiple-choice');
-      container.innerHTML = '';
+      container.innerHTML = ''; // Limpiar contenido anterior
+
       data.preguntas.forEach((pregunta) => {
-        const btn = document.createElement('button');
-        btn.textContent = pregunta.texto;
-        btn.onclick = () => checkAnswer(pregunta.correcta);
-        container.appendChild(btn);
+        // Crear un párrafo para la pregunta
+        const preguntaTexto = document.createElement('p');
+        preguntaTexto.textContent = pregunta.texto;
+        container.appendChild(preguntaTexto);
+
+        // Crear botones de respuesta
+        pregunta.opciones.forEach((opcion) => {
+          const btn = document.createElement('button');
+          btn.textContent = opcion;
+          btn.onclick = () => checkAnswer(opcion, pregunta.correcta);
+          container.appendChild(btn);
+        });
+
+        // Espaciado visual entre preguntas
+        container.appendChild(document.createElement('hr'));
       });
-    });
+    })
+    .catch(error => console.error("Error cargando las preguntas:", error));
 }
 
-function checkAnswer(correcta) {
-  if (correcta) {
-    alert("¡Correcto!");
+function checkAnswer(opcionSeleccionada, respuestaCorrecta) {
+  if (opcionSeleccionada === respuestaCorrecta) {
+    alert("¡Correcto! ✅");
   } else {
-    alert("Incorrecto, prueba otra opción.");
+    alert("Incorrecto, intenta de nuevo. ❌");
   }
 }
