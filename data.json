@@ -1,0 +1,32 @@
+[
+  {
+    "image": "farabeuf.jpg",
+    "questions": [
+      {
+        "question": "¿Cuál es el uso principal de este instrumento?",
+        "options": ["Corte", "Separación", "Sutura", "Clampeo"],
+        "answer": "Separación"
+      },
+      {
+        "question": "¿A qué especialidad pertenece?",
+        "options": ["Cardiología", "Traumatología", "Cirugía general", "Neurocirugía"],
+        "answer": "Cirugía general"
+      }
+    ]
+  },
+  {
+    "image": "metzenbaum.jpg",
+    "questions": [
+      {
+        "question": "¿Para qué se utiliza este instrumento?",
+        "options": ["Corte de tejidos delicados", "Separación de tejidos", "Sutura", "Clampeo"],
+        "answer": "Corte de tejidos delicados"
+      },
+      {
+        "question": "¿A qué especialidad pertenece?",
+        "options": ["Cardiología", "Traumatología", "Cirugía general", "Neurocirugía"],
+        "answer": "Cirugía general"
+      }
+    ]
+  }
+]
