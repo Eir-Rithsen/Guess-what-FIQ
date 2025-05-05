@@ -1,93 +1,108 @@
 // script.js
-const quizData = [
-  {
-    image: 'images/instrumento1.jpg',
-    questions: [
-      '¿Pregunta 1 del instrumento 1?',
-      '¿Pregunta 2 del instrumento 1?'
-    ]
-  },
-  {
-    image: 'images/instrumento2.jpg',
-    questions: [
-      '¿Pregunta 1 del instrumento 2?',
-      '¿Pregunta 2 del instrumento 2?'
-    ]
-  }
-  // Agrega más objetos según sea necesario
-];
 
+let data = [];
 let currentIndex = 0;
+let startTime;
 let timerInterval;
-let secondsElapsed = 0;
 
-const usernameInput = document.getElementById('username');
-const startBtn = document.getElementById('startBtn');
-const quizSection = document.querySelector('.quiz');
-const quizImage = document.getElementById('quizImage');
-const questionsContainer = document.getElementById('questionsContainer');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const timerDisplay = document.getElementById('timer');
-const resetBtn = document.getElementById('resetBtn');
-
-startBtn.addEventListener('click', () => {
-  const username = usernameInput.value.trim();
-  if (username === '') {
-    alert('Por favor, ingresa tu nombre.');
-    return;
+// Función para cargar los datos desde el JSON
+async function loadData() {
+  try {
+    const response = await fetch('data.json');
+    data = await response.json();
+    shuffleArray(data);
+    displayCurrentItem();
+  } catch (error) {
+    console.error('Error al cargar los datos:', error);
   }
-  document.querySelector('.user-info').style.display = 'none';
-  quizSection.style.display = 'block';
-  startTimer();
-  loadQuizItem();
-});
+}
 
-prevBtn.addEventListener('click', () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    loadQuizItem();
-  }
-});
-
-nextBtn.addEventListener('click', () => {
-  if (currentIndex < quizData.length - 1) {
-    currentIndex++;
-    loadQuizItem();
-  } else {
-    stopTimer();
-    alert(`¡Has completado el cuestionario en ${formatTime(secondsElapsed)}!`);
-  }
-});
-
-resetBtn.addEventListener('click', () => {
-  location.reload();
-});
-
-function loadQuizItem() {
-  const currentItem = quizData[currentIndex];
-  quizImage.src = currentItem.image;
+// Función para mostrar la imagen y las preguntas actuales
+function displayCurrentItem() {
+  const currentItem = data[currentIndex];
+  document.getElementById('instrument-image').src = `images/${currentItem.image}`;
+  const questionsContainer = document.getElementById('questions-container');
   questionsContainer.innerHTML = '';
+
   currentItem.questions.forEach((q, index) => {
-    const p = document.createElement('p');
-    p.textContent = q;
-    questionsContainer.appendChild(p);
+    const questionDiv = document.createElement('div');
+    questionDiv.classList.add('question');
+
+    const questionText = document.createElement('p');
+    questionText.textContent = q.question;
+    questionDiv.appendChild(questionText);
+
+    q.options.forEach(option => {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = `question-${index}`;
+      input.value = option;
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(option));
+      questionDiv.appendChild(label);
+    });
+
+    questionsContainer.appendChild(questionDiv);
   });
 }
 
+// Función para aleatorizar un arreglo
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// Función para iniciar el temporizador
 function startTimer() {
+  startTime = Date.now();
   timerInterval = setInterval(() => {
-    secondsElapsed++;
-    timerDisplay.textContent = formatTime(secondsElapsed);
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    document.getElementById('timer').textContent = `Tiempo: ${elapsed} segundos`;
   }, 1000);
 }
 
+// Función para detener el temporizador
 function stopTimer() {
   clearInterval(timerInterval);
 }
 
-function formatTime(seconds) {
-  const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
-  const secs = String(seconds % 60).padStart(2, '0');
-  return `${mins}:${secs}`;
+// Función para reiniciar el juego
+function resetGame() {
+  currentIndex = 0;
+  shuffleArray(data);
+  displayCurrentItem();
+  stopTimer();
+  startTimer();
 }
+
+// Event listeners para los botones
+document.getElementById('next-button').addEventListener('click', () => {
+  if (currentIndex < data.length - 1) {
+    currentIndex++;
+    displayCurrentItem();
+  } else {
+    stopTimer();
+    const totalTime = Math.floor((Date.now() - startTime) / 1000);
+    alert(`¡Has terminado! Tiempo total: ${totalTime} segundos`);
+  }
+});
+
+document.getElementById('prev-button').addEventListener('click', () => {
+  if (currentIndex > 0) {
+    currentIndex--;
+    displayCurrentItem();
+  }
+});
+
+document.getElementById('reset-button').addEventListener('click', () => {
+  resetGame();
+});
+
+// Inicio del juego
+window.addEventListener('load', () => {
+  loadData();
+  startTimer();
+});
