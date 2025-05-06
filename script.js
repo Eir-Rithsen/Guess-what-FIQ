@@ -1,12 +1,13 @@
 // script.js
 
+import { loginWithGoogle, saveScore, getLeaderboard } from "./firebase.js";
+
 let questionsData = [];
 let currentIndex = 0;
 let timer;
 let timeLimit = 30;
 let score = 0;
 
-// Cargar preguntas desde JSON
 fetch("main.json")
     .then(response => response.json())
     .then(data => {
@@ -16,16 +17,14 @@ fetch("main.json")
     })
     .catch(error => console.error("Error al cargar JSON:", error));
 
-// Mezclar aleatoriamente las preguntas
 function shuffleQuestions() {
     questionsData.sort(() => Math.random() - 0.5);
 }
 
-// Cargar pregunta actual
 function loadQuestion() {
     const questionSet = questionsData[currentIndex];
     document.getElementById("question-image").src = `imagenes/${questionSet.image}`;
-    
+
     let optionsHtml = questionSet.questions.map(q => 
         `<div>
             <p>${q.question}</p>
@@ -38,14 +37,12 @@ function loadQuestion() {
     startTimer();
 }
 
-// Validación de opción seleccionada
 function checkOption(selected, correct) {
     if (selected === correct) {
         score++;
     }
 }
 
-// Validación de nombre ingresado
 function checkAnswer() {
     const userAnswer = document.getElementById("answer-box").value.toLowerCase().trim();
     const correctName = questionsData[currentIndex].image.replace(".jpg", "").toLowerCase().trim();
@@ -58,7 +55,6 @@ function checkAnswer() {
     }
 }
 
-// Temporizador
 function startTimer() {
     let timeLeft = timeLimit;
     timer = setInterval(() => {
@@ -71,7 +67,6 @@ function startTimer() {
     }, 1000);
 }
 
-// Navegación entre preguntas
 function nextQuestion() {
     currentIndex = (currentIndex + 1) % questionsData.length;
     loadQuestion();
@@ -88,5 +83,3 @@ function restartGame() {
     shuffleQuestions();
     loadQuestion();
 }
-
-window.onload = loadQuestion;
