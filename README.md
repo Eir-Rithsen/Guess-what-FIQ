@@ -1,9 +1,9 @@
 # Guess-what-FIQ
 
-📁 mi_juego_quirurgico
+📁 Guess-waht-FIQ
 │-- 📁 imagenes
 │   │-- Tijeras de Metzenbaum.jpg
-│-- 📁 preguntas
+│-- 📄 data.json
 │   │-- tijeras_metzenbaum.json
 │-- 📄 index.html
 │-- 📄 styles.css
