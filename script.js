@@ -20,7 +20,7 @@ async function loadData() {
 // Función para mostrar la imagen y las preguntas actuales
 function displayCurrentItem() {
   const currentItem = data[currentIndex];
-  document.getElementById('instrument-image').src = `images/${currentItem.image}`;
+  document.getElementById('instrument-image').src = `imagenes/${currentItem.image}`;
   const questionsContainer = document.getElementById('questions-container');
   questionsContainer.innerHTML = '';
 
