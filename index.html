@@ -9,6 +9,9 @@
 <body>
     <div id="game-container">
         <h1>Guess What FIQ</h1>
+        <button onclick="loginWithGoogle()">Iniciar sesión con Google</button>
+        <p id="user-info"></p>
+        
         <div id="image-container">
             <img id="question-image" src="" alt="Pregunta">
         </div>
@@ -23,6 +26,7 @@
         <div id="leaderboard"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
