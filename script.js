@@ -5,11 +5,17 @@ let currentIndex = 0;
 let startTime;
 let timerInterval;
 
-// Función para cargar los datos desde el JSON
 async function loadData() {
   try {
     const response = await fetch('data.json');
-    data = await response.json();
+    const jsonData = await response.json();
+
+    if (!validateData(jsonData)) {
+      alert('Error en el formato del archivo JSON.');
+      return;
+    }
+
+    data = jsonData;
     shuffleArray(data);
     displayCurrentItem();
   } catch (error) {
@@ -17,7 +23,19 @@ async function loadData() {
   }
 }
 
-// Función para mostrar la imagen y las preguntas actuales
+function validateData(json) {
+  if (!Array.isArray(json)) return false;
+  return json.every(item =>
+    typeof item.image === 'string' &&
+    Array.isArray(item.questions) &&
+    item.questions.every(q =>
+      typeof q.question === 'string' &&
+      Array.isArray(q.options) && q.options.length > 0 &&
+      typeof q.answer === 'string'
+    )
+  );
+}
+
 function displayCurrentItem() {
   const currentItem = data[currentIndex];
   document.getElementById('instrument-image').src = `imagenes/${currentItem.image}`;
@@ -47,7 +65,6 @@ function displayCurrentItem() {
   });
 }
 
-// Función para aleatorizar un arreglo
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -55,7 +72,6 @@ function shuffleArray(array) {
   }
 }
 
-// Función para iniciar el temporizador
 function startTimer() {
   startTime = Date.now();
   timerInterval = setInterval(() => {
@@ -64,12 +80,10 @@ function startTimer() {
   }, 1000);
 }
 
-// Función para detener el temporizador
 function stopTimer() {
   clearInterval(timerInterval);
 }
 
-// Función para reiniciar el juego
 function resetGame() {
   currentIndex = 0;
   shuffleArray(data);
@@ -78,7 +92,6 @@ function resetGame() {
   startTimer();
 }
 
-// Event listeners para los botones
 document.getElementById('next-button').addEventListener('click', () => {
   if (currentIndex < data.length - 1) {
     currentIndex++;
@@ -101,7 +114,6 @@ document.getElementById('reset-button').addEventListener('click', () => {
   resetGame();
 });
 
-// Inicio del juego
 window.addEventListener('load', () => {
   loadData();
   startTimer();
