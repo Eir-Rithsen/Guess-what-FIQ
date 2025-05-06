@@ -1,38 +1,28 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Guess What FIQ</title>
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess What FIQ</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Guess What FIQ</h1>
-    <div class="user-info">
-      <label for="username">Nombre:</label>
-      <input type="text" id="username" placeholder="Ingresa tu nombre" />
-      <button id="startBtn">Comenzar</button>
+    <div id="game-container">
+        <h1>Guess What FIQ</h1>
+        <div id="image-container">
+            <img id="question-image" src="" alt="Pregunta">
+        </div>
+        <div id="quiz-options"></div>
+        <input type="text" id="answer-box" placeholder="Escribe el nombre completo">
+        <button onclick="checkAnswer()">Validar respuesta</button>
+        <div id="feedback"></div>
+        <div id="timer"></div>
+        <button onclick="nextQuestion()">Siguiente</button>
+        <button onclick="prevQuestion()">Anterior</button>
+        <button onclick="restartGame()">Reiniciar</button>
+        <div id="leaderboard"></div>
     </div>
-    <div class="quiz" style="display:none;">
-      <div class="image-container">
-        <img id="instrument-image" src="" alt="Imagen de instrumento" />
-      </div>
-      <div class="questions-container" id="questionsContainer"></div>
-      <div class="navigation">
-        <button id="prevBtn">Anterior</button>
-        <button id="nextBtn">Siguiente</button>
-      </div>
-      <div class="timer">
-        Tiempo: <span id="timer">00:00</span>
-      </div>
-      <div class="score">
-        Puntos: <span id="score">0</span>
-      </div>
-      <button id="resetBtn">Reiniciar</button>
-    </div>
-  </div>
-  <script src="script.js"></script>
+
+    <script src="script.js"></script>
 </body>
 </html>
